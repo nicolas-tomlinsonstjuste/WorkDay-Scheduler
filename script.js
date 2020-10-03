@@ -8,42 +8,48 @@ $(document).ready(function(){
 
     $("textarea").each(function(){
         
-        var noteLabel = 'note-' + $(this).attr('id');
+        var noteLabel = 'note-' + $(this).attr('class').split(" ")[1];
+       
         
-        var note = localStorage.getItem("textarea");
-        
+        var note = localStorage.getItem(noteLabel);
+        $(this).val(note)
 
     });
 
     $(".saveBtn").each(function(){
         $(this).on("click", function(){
-            console.log(this);
             var id = $(this).attr('id');
-            console.log(id);
             var noteLabel = 'note-' + id;
-            localStorage.setItem('.saveBtn', noteLabel)
+            console.log($("."+id).val())
+            localStorage.setItem(noteLabel, $("."+id).val())
         })
     });
 
     $(".time-container").each(function(){
+        
        
-        var id = $(this).attr('id'); 
+        var id = $(this).attr('id');
+        
+
+        //console.log("currHour")
+        //console.log("id")
        
 
         var currHour = moment().hour();
-        if (currHour > id) {
+        console.log({currHour,id});
+        if (currHour > id ) {
             
-            $(this).css('background-color', 'grey');
+            $(this).css('background-color', '#FEECF0');
         }
 
         if (currHour < id) {
 
-            $(this).css('background-color', 'green');
+            $(this).css('background-color', '#EFFAF3');
             
         }
 
         if (currHour == id) {
-            $(this).css('background-color', 'red');
+            $(this).css('background-color', '#FFFBEA');
         }
     });
 
